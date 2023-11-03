@@ -1,0 +1,38 @@
+{
+    "prompts": [
+      {
+        "heading": "Create a JSON representation of a list of fruits."
+      },
+      {
+        "heading": "Write a prompt for generating a haiku about nature."
+      },
+      {
+        "heading": "Describe the process of making a cup of coffee."
+      },
+      {
+        "heading": "Generate a list of famous historical landmarks around the world."
+      },
+      {
+        "heading": "Compose a brief summary of the theory of relativity."
+      },
+      {
+        "heading": "Describe the process of making a cup of coffee."
+      },
+      {
+        "heading": "Generate a list of famous historical landmarks around the world."
+      },
+      {
+        "heading": "Compose a brief summary of the theory of relativity."
+      },
+      {
+        "heading": "Write a prompt for generating a haiku about nature."
+      },
+      {
+        "heading": "Describe the process of making a cup of coffee."
+      },
+      {
+        "heading": "Generate a list of famous historical landmarks around the world."
+      }
+    ]
+}
+  
