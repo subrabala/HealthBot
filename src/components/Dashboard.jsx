@@ -7,44 +7,32 @@ import Screen from "./Screen";
 import randomAnswers from "../DummyJSON/Answers.json";
 import dummyResponse from "../DummyJSON/GeneratedPrompts.json";
 import FlowChatScreen from "./FlowChatScreen";
+import axios from "axios";
 
 const Dashboard = ({ flow }) => {
   const [prompt, setPrompt] = useState("");
-  const [gptresponse, setGptResponse] = useState("");
+  const [gptResponse, setGptResponse] = useState("");
 
   const handlePrompt = (e) => {
     setPrompt(e.target.value);
   };
 
-  const generatePrompt = () => {
-    if (prompt) {
-      const randomAnswer = getRandomAnswer();
-      const newQuestion = {
-        question: prompt,
-        response: randomAnswer,
-      };
-      dummyResponse.healthFAQs.push(newQuestion);
-      setGptResponse(newQuestion);
-      setPrompt("");
+  // GPT Response
+  const generatePrompt = async () => {
+    try {
+      const response = await axios.post("http://64.227.134.14/api", {
+        query: prompt,
+      });
+      setGptResponse(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
-
-  function getRandomAnswer() {
-    const randomIndex = Math.floor(
-      Math.random() * randomAnswers.medicalAnswers.length
-    );
-
-    return randomAnswers.medicalAnswers[randomIndex];
-  }
 
   return (
     <div className="bg-[#0f1b38] container-fluid w-full h-full">
       <div className="w-[90%] h-5/6 flex mx-auto">
-        {flow ? (
-          <FlowChatScreen />
-        ) : (
-          <Screen gptresponse={gptresponse} dummyResponse={dummyResponse} />
-        )}
+        {flow ? <FlowChatScreen /> : <Screen gptresponse={gptResponse} />}
       </div>
       <div className="h-1/6 flex items-center">
         {flow ? (
@@ -58,7 +46,7 @@ const Dashboard = ({ flow }) => {
               className="border-none text-white"
             />
             <IconButton
-              onClick={generatePrompt}
+              onClick={() => generatePrompt()}
               className="rounded-full bg-transparent"
             >
               <FontAwesomeIcon
