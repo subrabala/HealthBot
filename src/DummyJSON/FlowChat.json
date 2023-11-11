@@ -1,35 +1,29 @@
 {
-  "question": "What is the importance of regular exercise?",
-  "answers": [
-    {
-      "id": "1",
-      "answer": "Regular exercise helps improve cardiovascular health.",
-      "follow-upQuestions": [
-        {
-          "id": "1.1",
-          "question": "What are some cardiovascular exercises?"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "answer": "Exercise can help with weight management and obesity prevention.",
-      "follow-upQuestions": [
-        {
-          "id": "2.1",
-          "question": "What types of exercises are effective for weight management?"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "answer": "Physical activity contributes to better mental health and reduced stress.",
-      "follow-upQuestions": [
-        {
-          "id": "3.1",
-          "question": "How does exercise impact mental well-being?"
-        }
-      ]
-    }
+  "journal_id": "1323a670-93d0-4825-a098-303357fe61e3",
+  "question": {
+      "id": "c8951605-3904-494f-a2a9-ce651dfb211b",
+      "expression": "How are you feeling today?"
+  },
+  "answer_options": [
+      {
+          "id": "eb3462b9-8262-40c1-bbb4-e315fe01e781",
+          "expression": "Not Good",
+          "suggested_action": null
+      },
+      {
+          "id": "0f05da14-fd6c-4973-8c93-f164e733341f",
+          "expression": "Good",
+          "suggested_action": null
+      },
+      {
+          "id": "b326d543-da9b-4815-b293-f21fe6cfd76e",
+          "expression": "Good",
+          "suggested_action": null
+      },
+      {
+          "id": "617dce2b-3dd1-475d-a1a0-f71217e006b3",
+          "expression": "Not Good",
+          "suggested_action": null
+      }
   ]
 }
