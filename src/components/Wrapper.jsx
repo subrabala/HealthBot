@@ -18,7 +18,7 @@ const Wrapper = () => {
           <ChatHistory flow={flow} setFlow={setFlow} />
         </div>
         <div className="w-4/5 p-4">
-          <Dashboard />
+          <Dashboard flow={flow} />
         </div>
       </div>
     </CurrentStateContext.Provider>

@@ -164,7 +164,9 @@ const ChatHistory = ({ setFlow, flow }) => {
 
       <div className="p-2 border rounded-lg flex gap-2 mt-auto">
         <button
-          className="py-2 rounded-md bg-[#27324C] text-white w-full"
+          className={`py-2 rounded-md bg-[#27324C] text-white w-full ${
+            flow ? "bg-blue-gray-600" : ""
+          }`}
           onClick={() => {
             setFlow(true);
           }}
@@ -172,7 +174,9 @@ const ChatHistory = ({ setFlow, flow }) => {
           Flow
         </button>
         <button
-          className="py-2 rounded-md bg-[#27324C] text-white w-full"
+          className={`py-2 rounded-md bg-[#27324C] text-white w-full ${
+            !flow ? "bg-blue-gray-600" : ""
+          }`}
           onClick={() => {
             setFlow(false);
           }}

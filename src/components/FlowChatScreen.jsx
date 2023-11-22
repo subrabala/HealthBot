@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import { useCurrentState } from "./Wrapper";
 
 const FlowChatScreen = () => {
   const [primary, setPrimary] = useState({
@@ -11,10 +11,12 @@ const FlowChatScreen = () => {
     question: "",
     answers: [],
   });
-  const [cookies, setCookie] = useCookies(["jwt"]);
   const [journalID, setJournalID] = useState(null);
   const [journalData, setJournalData] = useState(null);
   const [suggestedAction, setSuggestedAction] = useState(null);
+
+  const { currentState, setCurrentState } = useCurrentState();
+  const jwt = localStorage.getItem("chat");
 
   useEffect(() => {
     const fetchPrimaryQuestion = async () => {
@@ -23,7 +25,7 @@ const FlowChatScreen = () => {
           "http://64.227.134.14/api/get_question/en/c8951605-3904-494f-a2a9-ce651dfb211b/",
           {
             headers: {
-              Authorization: `Bearer ${cookies.jwt || ""}`,
+              Authorization: `Bearer ${jwt}`,
             },
           }
         );
@@ -41,21 +43,29 @@ const FlowChatScreen = () => {
   }, []);
 
   useEffect(() => {
-    const handleJournalData = async () => {
-      const response = await axios.get(
-        `http://64.227.134.14/api/journal/get/${journalID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.jwt || ""}`,
-          },
+    if (currentState.currentConvo || current) {
+      const handleJournalData = async () => {
+        try {
+          const response = await axios.get(
+            `http://64.227.134.14/api/journal/get/${
+              currentState.currentConvo || current
+            }`,
+            {
+              headers: {
+                Authorization: `Bearer ${jwt}`,
+              },
+            }
+          );
+          console.log(response.data);
+          setJournalData(response.data);
+        } catch (error) {
+          console.error(error);
         }
-      );
-      // console.log(response.data);
-      setJournalData(response.data);
-    };
+      };
 
-    handleJournalData();
-  }, [current]);
+      handleJournalData();
+    }
+  }, [currentState.currentConvo, current]);
 
   const handleAnswerClick = async (id, action) => {
     const response = await axios.post(
@@ -66,7 +76,7 @@ const FlowChatScreen = () => {
       },
       {
         headers: {
-          Authorization: `Bearer ${cookies.jwt || ""}`,
+          Authorization: `Bearer ${jwt}`,
         },
       }
     );
@@ -77,8 +87,9 @@ const FlowChatScreen = () => {
       answers: response.data.answer_options,
     };
     setCurrent(currentData);
-    console.log(currentData)
+    console.log(currentData);
   };
+
   return (
     <div className="h-100 flex flex-col w-full">
       <div className="flex-1 overflow-y-auto p-4 entire_screen">

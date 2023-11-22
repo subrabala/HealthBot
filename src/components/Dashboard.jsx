@@ -8,7 +8,7 @@ import FlowChatScreen from "./FlowChatScreen";
 import axios from "axios";
 import { useCurrentState } from "./Wrapper"; 
 
-const Dashboard = () => {
+const Dashboard = ({flow}) => {
   const { currentState, setCurrentState } = useCurrentState();
   const jwt = localStorage.getItem("chat");
   const [prompt, setPrompt] = useState("");
@@ -53,14 +53,14 @@ const Dashboard = () => {
   return (
     <div className="bg-[#0f1b38] container-fluid w-full h-full">
       <div className="w-[90%] h-5/6 flex mx-auto">
-        {currentState.flow ? (
+        {flow ? (
           <FlowChatScreen />
         ) : (
           <Screen chatID={currentState.chatID} />
         )}
       </div>
       <div className="h-1/6 flex items-center">
-        {currentState.flow ? (
+        {flow ? (
           ""
         ) : (
           <div className="rounded-xl flex w-full border-white p-1 bg-[#020C1B]">
