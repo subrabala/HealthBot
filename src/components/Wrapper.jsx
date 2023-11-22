@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
 import Dashboard from "../components/Dashboard";
 import ChatHistory from "../components/ChatHistory";
 
+const CurrentStateContext = createContext();
+
 const Wrapper = () => {
   const [flow, setFlow] = useState(true);
-  const [gptLogs, setGptLogs] = useState([]);
+  const [currentState, setCurrentState] = useState({
+    chatID: null,
+    currentConvo: null,
+  });
+
   return (
-    <div className="h-screen bg-[#0f1b38] flex">
-      <div className="w-1/5 p-4 bg-[#060f23] rounded-md">
-        <ChatHistory setFlow={setFlow} flow={flow} setGptLogs={setGptLogs} />
+    <CurrentStateContext.Provider value={{ currentState, setCurrentState }}>
+      <div className="h-screen bg-[#0f1b38] flex">
+        <div className="w-1/5 p-4 bg-[#060f23] rounded-md">
+          <ChatHistory flow={flow} setFlow={setFlow} />
+        </div>
+        <div className="w-4/5 p-4">
+          <Dashboard />
+        </div>
       </div>
-      <div className="w-4/5 p-4">
-        <Dashboard flow={flow} gptLogs={gptLogs} />
-      </div>
-    </div>
+    </CurrentStateContext.Provider>
   );
+};
+
+export const useCurrentState = () => {
+  return useContext(CurrentStateContext);
 };
 
 export default Wrapper;

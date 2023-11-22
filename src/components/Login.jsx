@@ -20,14 +20,20 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    const formData = new FormData();
+    formData.append("username", loginFields.username);
+    formData.append("password", loginFields.password);
     try {
-      const response = await axios.get(
-        `http://64.227.134.14/api/auth/login?username=${loginFields.username}&password=${loginFields.password}`
+      const response = await axios.put(
+        `http://64.227.134.14/api/auth/login`,
+        formData
       );
-      console.log(JSON.stringify(response.data));
+      const token = response.data.access_token;
+      localStorage.setItem("chat", token);
       navigate("/chat");
     } catch (error) {
       console.log(error);
+      alert(error.response.data.detail.message);
     }
   };
 
@@ -47,6 +53,7 @@ const Login = () => {
       navigate("/chat");
     } catch (error) {
       console.log(error);
+      alert(error.response.data.detail.message);
     }
   };
 
@@ -173,7 +180,7 @@ const Login = () => {
                   type="name"
                   value={loginFields.username}
                   onChange={(e) =>
-                    setLoginEmail({ ...loginFields, username: e.target.value })
+                    setLoginFields({ ...loginFields, username: e.target.value })
                   }
                 />
                 <Input
@@ -182,7 +189,7 @@ const Login = () => {
                   type="password"
                   value={loginFields.password}
                   onChange={(e) =>
-                    setLoginPassword({
+                    setLoginFields({
                       ...loginFields,
                       password: e.target.value,
                     })
