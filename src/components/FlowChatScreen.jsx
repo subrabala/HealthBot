@@ -39,6 +39,7 @@ const FlowChatScreen = () => {
         console.error(error);
       }
     };
+
     fetchPrimaryQuestion();
   }, []);
 
@@ -48,7 +49,7 @@ const FlowChatScreen = () => {
         try {
           const response = await axios.get(
             `http://64.227.134.14/api/journal/get/${
-              currentState.currentConvo || current
+              currentState.currentConvo || journalID
             }`,
             {
               headers: {

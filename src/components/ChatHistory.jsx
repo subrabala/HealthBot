@@ -90,10 +90,19 @@ const ChatHistory = ({ setFlow, flow }) => {
     setCurrentState({ ...currentState, currentConvo: chatSessionId });
   };
 
+  const handleNewChat = () => {window.location.reload()  };
+
   return (
     <div className="h-100 flex flex-col items-stretch gap-4">
-      <div className="text-blue-gray-400 font-semibold">Chat History</div>
-
+      <div className="text-blue-gray-400 font-semibold">
+        Chat History{" "}
+        <button
+          className="p-2 border rounded-md text-white border-white"
+          onClick={() => handleNewChat()}
+        >
+          + New Chat
+        </button>
+      </div>
       <div
         className="chat-history h-5/6"
         style={{
