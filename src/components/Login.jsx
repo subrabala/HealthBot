@@ -49,7 +49,8 @@ const Login = () => {
           password: signupFields.password,
         }
       );
-      console.log(response.status);
+      const token = response.data.access_token;
+      localStorage.setItem("chat", token);
       navigate("/chat");
     } catch (error) {
       console.log(error);
@@ -63,7 +64,7 @@ const Login = () => {
         <div
           className="h-screen bg-cover bg-no-repeat flex items-center justify-start"
           style={{
-            backgroundImage: 'url("/public/login.png")',
+            backgroundImage: 'url("/login.png")',
             borderRadius: "0 0 230px 0",
           }}
         >
