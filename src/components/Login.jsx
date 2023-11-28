@@ -70,7 +70,7 @@ const Login = () => {
         >
           <div>
             <h1 className="text-5xl font-semibold p-5 text-white px-16">
-              HealthBot: Your saviour
+              SRM Health Bot
             </h1>
             <h4 className="text-lg text-white px-16">
               Empowering Health through AI Conversations
