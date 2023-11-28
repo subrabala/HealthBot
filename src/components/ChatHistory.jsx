@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder, faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { MdRefresh } from "react-icons/md";
 import axios from "axios";
 import timestamp from "../utils/timeStamp";
 import { useCurrentState } from "./Wrapper";
+import { Tooltip } from "@material-tailwind/react";
 
 const ChatHistory = ({ setFlow, flow }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -11,7 +13,7 @@ const ChatHistory = ({ setFlow, flow }) => {
   const [gptHistory, setgptHistory] = useState(null);
   const [flowLogs, setFlowLogs] = useState(null);
   const { currentState, setCurrentState } = useCurrentState();
-
+  const [refresh, setRefresh] = useState(0);
   const handleDeleteJournal = async (id) => {
     try {
       setFlowLogs((prevHistory) =>
@@ -80,7 +82,7 @@ const ChatHistory = ({ setFlow, flow }) => {
 
     handleGetGptLogs();
     handleGetFlowLogs();
-  }, [flow]);
+  }, [flow, refresh]);
 
   const handleSetCurrentFlow = (journalId) => {
     setCurrentState({ ...currentState, currentConvo: journalId });
@@ -90,18 +92,25 @@ const ChatHistory = ({ setFlow, flow }) => {
     setCurrentState({ ...currentState, currentConvo: chatSessionId });
   };
 
-  const handleNewChat = () => {window.location.reload()  };
+  const handleNewChat = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="h-100 flex flex-col items-stretch gap-4">
-      <div className="text-blue-gray-400 font-semibold">
-        Chat History{" "}
+      <div className="flex  items-center justify-between text-blue-gray-400 font-semibold">
+        <div> Chat History </div>
         <button
           className="p-2 border rounded-md text-white border-white"
           onClick={() => handleNewChat()}
         >
           + New Chat
         </button>
+        <Tooltip content="sync" placement="right-end">
+          <button onClick={() => setRefresh(1)}>
+            <MdRefresh />
+          </button>
+        </Tooltip>
       </div>
       <div
         className="chat-history h-5/6"
