@@ -96,8 +96,7 @@ const ChatHistory = ({ setFlow, flow }) => {
   };
 
   const handleNewChat = () => {
-    window.location.reload();
-    // navigate("/chat");
+    navigate(window.location.pathname, { replace: true });
   };
 
   return (
