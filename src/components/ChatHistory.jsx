@@ -97,7 +97,7 @@ const ChatHistory = ({ setFlow, flow }) => {
   };
 
   const handleNewChat = () => {
-    // navigate(window.location.pathname, { replace: true });
+    window.location.reload()
     setCurrentState({ currentConvo:null, chatID: null });
   };
 
