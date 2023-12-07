@@ -97,7 +97,7 @@ const ChatHistory = ({ setFlow, flow }) => {
 
   const handleNewChat = () => {
     // window.location.reload();
-    navigate("https://health-bot-ten.vercel.app/chat");
+    navigate("/");
   };
 
   return (
