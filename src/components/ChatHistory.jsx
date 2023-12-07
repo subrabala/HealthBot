@@ -208,7 +208,7 @@ const ChatHistory = ({ setFlow, flow }) => {
             setFlow(true);
           }}
         >
-          Flow
+        Journal
         </button>
         <button
           className={`py-2 rounded-md bg-[#27324C] text-white w-full ${
@@ -218,7 +218,7 @@ const ChatHistory = ({ setFlow, flow }) => {
             setFlow(false);
           }}
         >
-          GPT
+          Chat
         </button>
       </div>
     </div>
