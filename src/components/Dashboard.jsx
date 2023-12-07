@@ -6,9 +6,9 @@ import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import Screen from "./Screen";
 import FlowChatScreen from "./FlowChatScreen";
 import axios from "axios";
-import { useCurrentState } from "./Wrapper"; 
+import { useCurrentState } from "./Wrapper";
 
-const Dashboard = ({flow}) => {
+const Dashboard = ({ flow }) => {
   const { currentState, setCurrentState } = useCurrentState();
   const jwt = localStorage.getItem("chat");
   const [prompt, setPrompt] = useState("");
@@ -18,7 +18,8 @@ const Dashboard = ({flow}) => {
   };
 
   // GPT Response
-  const generatePrompt = async () => {
+  const generatePrompt = async (e) => {
+    e.preventDefault();
     try {
       const requestBody = {
         query: prompt,
@@ -37,7 +38,6 @@ const Dashboard = ({flow}) => {
       );
 
       setPrompt("");
-      // console.log(response.data);
 
       if (response.data.chat_session_id !== null) {
         setCurrentState({
@@ -56,30 +56,30 @@ const Dashboard = ({flow}) => {
         {flow ? (
           <FlowChatScreen />
         ) : (
-          <Screen chatID={currentState.chatID} />
+          <Screen chatID={currentState.chatID} prompt={prompt} />
         )}
       </div>
       <div className="h-1/6 flex items-center">
         {flow ? (
           ""
         ) : (
-          <div className="rounded-xl flex w-full border-white p-1 bg-[#020C1B]">
+          <form
+            className="rounded-xl flex w-full border-white p-1 bg-[#020C1B]"
+            onSubmit={(e) => generatePrompt(e)}
+          >
             <Input
               placeholder="Send a message"
               value={prompt}
               onChange={handlePrompt}
               className="border-none text-white"
             />
-            <IconButton
-              onClick={() => generatePrompt()}
-              className="rounded-full bg-transparent"
-            >
+            <IconButton type="submit" className="rounded-full bg-transparent">
               <FontAwesomeIcon
                 icon={faPaperPlane}
                 style={{ color: "#ffffff" }}
               />
             </IconButton>
-          </div>
+          </form>
         )}
       </div>
     </div>

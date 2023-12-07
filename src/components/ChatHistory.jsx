@@ -51,6 +51,7 @@ const ChatHistory = ({ setFlow, flow }) => {
           },
         }
       );
+
     } catch (error) {}
   };
 
@@ -92,11 +93,12 @@ const ChatHistory = ({ setFlow, flow }) => {
   };
 
   const handleSetCurrentChat = (chatSessionId) => {
-    setCurrentState({ ...currentState, currentConvo: chatSessionId });
+    setCurrentState({ ...currentState, chatID: chatSessionId });
   };
 
   const handleNewChat = () => {
-    navigate(window.location.pathname, { replace: true });
+    // navigate(window.location.pathname, { replace: true });
+    setCurrentState({ ...currentState, chatID: null });
   };
 
   return (
