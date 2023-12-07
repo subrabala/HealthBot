@@ -97,7 +97,7 @@ const ChatHistory = ({ setFlow, flow }) => {
 
   const handleNewChat = () => {
     // window.location.reload();
-    navigate("/");
+    navigate("/chat");
   };
 
   return (
