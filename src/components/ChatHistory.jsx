@@ -14,13 +14,14 @@ const ChatHistory = ({ setFlow, flow }) => {
   const [flowLogs, setFlowLogs] = useState(null);
   const { currentState, setCurrentState } = useCurrentState();
   const [refresh, setRefresh] = useState(0);
+  const [selectedFlowIndex, setSelectedFlowIndex] = useState(null);
   const handleDeleteJournal = async (id) => {
     try {
       setFlowLogs((prevHistory) =>
         prevHistory.filter((item) => item.journal_id !== id)
       );
       const response = await axios.delete(
-        `http://64.227.134.14/api/journal/delete/${id}`,
+        `https://shivanshgoel.xyz/api/journal/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
@@ -41,7 +42,7 @@ const ChatHistory = ({ setFlow, flow }) => {
       );
       console.log(gptHistory);
       const response = await axios.delete(
-        `http://64.227.134.14/api/gpt_logs/delete/${id}`,
+        `https://shivanshgoel.xyz/api/gpt_logs/delete/${id}`,
         {
           headers: {
             Authorization: `Bearer ${jwt}`,
@@ -55,7 +56,7 @@ const ChatHistory = ({ setFlow, flow }) => {
     const handleGetGptLogs = async () => {
       try {
         const response = await axios.get(
-          `http://64.227.134.14/api/gpt_logs/get`,
+          `https://shivanshgoel.xyz/api/gpt_logs/get`,
           {
             headers: {
               Authorization: `Bearer ${jwt}`,
@@ -69,7 +70,7 @@ const ChatHistory = ({ setFlow, flow }) => {
     const handleGetFlowLogs = async () => {
       try {
         const response = await axios.get(
-          `http://64.227.134.14/api/journal/get`,
+          `https://shivanshgoel.xyz/api/journal/get`,
           {
             headers: {
               Authorization: `Bearer ${jwt}`,
@@ -127,11 +128,18 @@ const ChatHistory = ({ setFlow, flow }) => {
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{
                   background:
-                    hoveredIndex === index ? "#30434d" : "transparent",
+                    hoveredIndex === index
+                      ? "#30434d"
+                      : selectedFlowIndex === index
+                      ? "#30434d"
+                      : "transparent",
                   cursor: "pointer",
                 }}
                 key={index}
-                onClick={() => handleSetCurrentFlow(item.journal_id)}
+                onClick={() => {
+                  setSelectedFlowIndex(index);
+                  handleSetCurrentFlow(item.journal_id);
+                }}
               >
                 <FontAwesomeIcon icon={faFolder} className="text-white mr-4" />
                 <div className="text-[#e8eef1] text-sm overflow-hidden whitespace-nowrap flex items-center">
@@ -156,11 +164,18 @@ const ChatHistory = ({ setFlow, flow }) => {
                 onMouseLeave={() => setHoveredIndex(null)}
                 style={{
                   background:
-                    hoveredIndex === index ? "#30434d" : "transparent",
+                    hoveredIndex === index
+                      ? "#30434d"
+                      : selectedFlowIndex === index
+                      ? "#30434d"
+                      : "transparent",
                   cursor: "pointer",
                 }}
                 key={index}
-                onClick={() => handleSetCurrentChat(item.chat_session_id)}
+                onClick={() => {
+                  setSelectedFlowIndex(index);
+                  handleSetCurrentChat(item.chat_session_id);
+                }}
               >
                 <FontAwesomeIcon icon={faFolder} className="text-white mr-4" />
                 <div className="text-[#e8eef1] text-sm overflow-hidden whitespace-nowrap flex items-center">

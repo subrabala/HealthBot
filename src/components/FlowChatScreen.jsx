@@ -22,7 +22,7 @@ const FlowChatScreen = () => {
     const fetchPrimaryQuestion = async () => {
       try {
         const response = await axios.get(
-          "http://64.227.134.14/api/get_question/en/c8951605-3904-494f-a2a9-ce651dfb211b/",
+          "https://shivanshgoel.xyz/api/get_question/en/c8951605-3904-494f-a2a9-ce651dfb211b/",
           {
             headers: {
               Authorization: `Bearer ${jwt}`,
@@ -48,7 +48,7 @@ const FlowChatScreen = () => {
       const handleJournalData = async () => {
         try {
           const response = await axios.get(
-            `http://64.227.134.14/api/journal/get/${
+            `https://shivanshgoel.xyz/api/journal/get/${
               currentState.currentConvo || journalID
             }`,
             {
@@ -70,7 +70,7 @@ const FlowChatScreen = () => {
 
   const handleAnswerClick = async (id, action) => {
     const response = await axios.post(
-      `http://64.227.134.14/api/get_question/en`,
+      `https://shivanshgoel.xyz/api/get_question/en`,
       {
         answer_id: id,
         journal_id: journalID,
@@ -124,11 +124,11 @@ const FlowChatScreen = () => {
           ))}
         <div className="text-white text-xl p-2"> {current.question}</div>
         {suggestedAction ? (
-          <div className="bg-transparent rounded-lg border  border-gray-500 text-white p-2 m-2">
+          <div className="bg-transparent rounded-lg border w-100 border-gray-500 text-white p-2 m-2">
             {suggestedAction}
           </div>
         ) : (
-          current.answers.map((answer) => (
+          current.answers?.map((answer) => (
             <button
               key={answer.id}
               className="bg-transparent rounded-lg border hover:bg-[#2a457e] border-gray-500 text-white p-2 m-2"

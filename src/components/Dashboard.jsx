@@ -27,7 +27,7 @@ const Dashboard = ({flow}) => {
         requestBody.chat_session_id = currentState.chatID;
       }
       const response = await axios.post(
-        "http://64.227.134.14/api/gpt_response",
+        "https://shivanshgoel.xyz/api/gpt_response",
         requestBody,
         {
           headers: {
@@ -37,7 +37,7 @@ const Dashboard = ({flow}) => {
       );
 
       setPrompt("");
-      console.log(response.data);
+      // console.log(response.data);
 
       if (response.data.chat_session_id !== null) {
         setCurrentState({

@@ -25,7 +25,7 @@ const Login = () => {
     formData.append("password", loginFields.password);
     try {
       const response = await axios.put(
-        `http://64.227.134.14/api/auth/login`,
+        `https://shivanshgoel.xyz/api/auth/login`,
         formData
       );
       const token = response.data.access_token;
@@ -40,7 +40,7 @@ const Login = () => {
   const handleSignup = async () => {
     try {
       const response = await axios.post(
-        "http://64.227.134.14/api/auth/createaccount",
+        "https://shivanshgoel.xyz/api/auth/createaccount",
         {
           first_name: signupFields.firstName,
           last_name: signupFields.lastName,
