@@ -114,7 +114,6 @@ const FlowChatScreen = () => {
               <div className="text-white text-xl p-2">
                 {journal.question_expression}{" "}
                 <span>
-                  <FaPencil />
                 </span>
               </div>
               <button
