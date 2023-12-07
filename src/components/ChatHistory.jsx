@@ -6,8 +6,10 @@ import axios from "axios";
 import timestamp from "../utils/timeStamp";
 import { useCurrentState } from "./Wrapper";
 import { Tooltip } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const ChatHistory = ({ setFlow, flow }) => {
+  const navigate = useNavigate();
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const jwt = localStorage.getItem("chat");
   const [gptHistory, setgptHistory] = useState(null);
@@ -94,7 +96,8 @@ const ChatHistory = ({ setFlow, flow }) => {
   };
 
   const handleNewChat = () => {
-    window.location.reload();
+    // window.location.reload();
+    navigate("https://shivanshgoel.xyz/chat");
   };
 
   return (
