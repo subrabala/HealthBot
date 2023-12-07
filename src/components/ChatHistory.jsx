@@ -98,7 +98,7 @@ const ChatHistory = ({ setFlow, flow }) => {
   };
 
   return (
-    <div className="h-100 flex flex-col items-stretch gap-4">
+    <div className="h-full flex flex-col items-stretch gap-4">
       <div className="flex  items-center justify-between text-blue-gray-400 font-semibold">
         <div> Chat History </div>
         <button
